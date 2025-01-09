@@ -32,7 +32,7 @@ abstract class BankAccount {
     }
 
     public void withdraw(double amount) {
-        if (amount > 0 && amount <= accountBalance ) {
+        if (amount > 0) {
             accountBalance -= amount;
         } else {
             System.out.println("Invalid withdraw amount");
@@ -40,5 +40,4 @@ abstract class BankAccount {
     }
 
     public abstract void displayAccountData();
-
 }
