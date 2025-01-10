@@ -6,8 +6,9 @@ import java.util.Scanner;
 public class StudentManagement {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        SMS_JSON smsJson = new SMS_JSON();
         ArrayList<Student> students = new ArrayList<>();
+        smsJson.setStudents(students);
 
         while (true) {
             System.out.println("===== Student Menu =====");
@@ -16,7 +17,9 @@ public class StudentManagement {
             System.out.println("3. Display number of students");
             System.out.println("4. Delete student");
             System.out.println("5. Edit student");
-            System.out.println("6. Exit");
+            System.out.println("6. Save to JSON");
+            System.out.println("7. Load from JSON");
+            System.out.println("8. Exit");
             System.out.println("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -54,17 +57,14 @@ public class StudentManagement {
                     }
 
                     Student student = new Student(firstName, lastName, studentAge, major);
-
                     students.add(student);
-
-                    System.out.println(" Information saved successfully " + student.toString());
+                    System.out.println("Information saved successfully " + student.toString());
                     break;
                 case 2:
                     System.out.println("===== Student List =====");
-                    System.out.printf("%-10s %-20s %-20s %-5s %-20s\n", " ID", "First Name", "Last Name", "Age", "Major");
+                    System.out.printf("%-10s %-20s %-20s %-5s %-20s\n", "ID", "First Name", "Last Name", "Age", "Major");
                     System.out.println("---------------------------------------------------------");
-                    for (int i = 0; i < students.size(); i++) {
-                        Student s = students.get(i);
+                    for (Student s : students) {
                         System.out.printf("%-10d %-20s %-20s %-5d %-20s\n",
                                 s.getStudentId(),
                                 s.getFirstName(),
@@ -134,10 +134,18 @@ public class StudentManagement {
                     }
                     break;
                 case 6:
+                    smsJson.saveToJson("students.json");
+                    System.out.println("Students saved to JSON file successfully");
+                    break;
+                case 7:
+                    smsJson.loadFromJson("students.json");
+                    students = (ArrayList<Student>) smsJson.getStudents();
+                    System.out.println("Students loaded from JSON file successfully");
+                    break;
+                case 8:
                     scanner.close();
                     System.exit(0);
                     break;
-
                 default:
                     System.out.println("Invalid choice");
             }
