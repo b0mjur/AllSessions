@@ -25,11 +25,15 @@ public class StudentManagement {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
+                    System.out.println("Enter student type (1 for Graduate, 2 for Undergraduate): ");
+                    int type = scanner.nextInt();
+                    scanner.nextLine();
+
                     System.out.println("Enter student first name: ");
-                    String firstName = scanner.next();
+                    String firstName = scanner.nextLine();
 
                     System.out.println("Enter student last name: ");
-                    String lastName = scanner.next();
+                    String lastName = scanner.nextLine();
 
                     int studentAge;
                     while (true) {
@@ -56,9 +60,21 @@ public class StudentManagement {
                         }
                     }
 
-                    Student student = new Student(firstName, lastName, studentAge, major);
-                    students.add(student);
-                    System.out.println("Information saved successfully " + student.toString());
+                    if (type == 1) {
+                        System.out.println("Enter GPA: ");
+                        double gpa = scanner.nextDouble();
+                        GraduateStudent gradStudent = new GraduateStudent(firstName, lastName, studentAge, major, gpa);
+                        students.add(gradStudent);
+                        System.out.println("Information saved successfully " + gradStudent);
+                    } else if (type == 2) {
+                        System.out.println("Enter undergraduate year: ");
+                        int undergraduateYear = scanner.nextInt();
+                        UndergraduateStudent undergradStudent = new UndergraduateStudent(firstName, lastName, studentAge, major, undergraduateYear);
+                        students.add(undergradStudent);
+                        System.out.println("Information saved successfully " + undergradStudent);
+                    } else {
+                        System.out.println("Invalid student type");
+                    }
                     break;
                 case 2:
                     System.out.println("===== Student List =====");
@@ -102,9 +118,9 @@ public class StudentManagement {
                     for (Student s : students) {
                         if (s.getStudentId() == idToEdit) {
                             System.out.println("Enter new first name: ");
-                            s.setFirstName(scanner.next());
+                            s.setFirstName(scanner.nextLine());
                             System.out.println("Enter new last name: ");
-                            s.setLastName(scanner.next());
+                            s.setLastName(scanner.nextLine());
                             System.out.println("Enter new age: ");
                             while (true) {
                                 try {
@@ -123,6 +139,10 @@ public class StudentManagement {
                                 } catch (IllegalArgumentException e) {
                                     System.out.println(e.getMessage());
                                 }
+                            }
+                            if (s instanceof GraduateStudent) {
+                                System.out.println("Enter new GPA: ");
+                                ((GraduateStudent) s).setGpa(scanner.nextDouble());
                             }
                             System.out.println("Student edited successfully");
                             found = true;

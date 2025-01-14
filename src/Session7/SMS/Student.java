@@ -1,6 +1,6 @@
 package Session7.SMS;
 
-public class Student {
+public abstract class Student {
     public int studentId;
     private String firstName;
     private String lastName;
