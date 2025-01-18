@@ -1,15 +1,25 @@
 package Session7.SMS;
 
-public class UndergraduateStudent extends Student {
+import Session7.SMS.Printable;
+
+public class UndergraduateStudent extends Student implements Printable {
     private int undergraduateYear;
 
-    public UndergraduateStudent(String fName, String lName, int Age, String major, int undergraduateYear) {
-        super(fName, lName, Age, major);
+    public UndergraduateStudent(String firstName, String lastName, int studentAge, String major, int undergraduateYear) {
+        super(firstName, lastName, studentAge, major);
+        this.undergraduateYear = undergraduateYear;
+    }
+
+    public int getUndergraduateYear() {
+        return undergraduateYear;
+    }
+
+    public void setUndergraduateYear(int undergraduateYear) {
         this.undergraduateYear = undergraduateYear;
     }
 
     @Override
-    public String toString() {
-        return super.toString() + String.format(", Undergraduate Year: %d", undergraduateYear);
+    public void printDetails() {
+        System.out.println("Undergraduate Student: " + getFirstName() + " " + getLastName() + ", Age: " + getStudentAge() + ", Major: " + getMajor() + ", Year: " + undergraduateYear);
     }
 }

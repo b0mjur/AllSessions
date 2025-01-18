@@ -31,7 +31,6 @@ public class SMS_JSON {
         }
     }
 
-    // Getter and Setter for students
     public List<Student> getStudents() {
         return students;
     }

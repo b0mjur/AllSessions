@@ -1,11 +1,15 @@
 package Session7.SMS;
 
-public class GraduateStudent extends Student {
+public class GraduateStudent extends Student implements Printable {
     private double gpa;
 
-    public GraduateStudent(String fName, String lName, int Age, String major, double gpa) {
-        super(fName, lName, Age, major);
+    public GraduateStudent(String firstName, String lastName, int studentAge, String major, double gpa) {
+        super(firstName, lastName, studentAge, major);
         this.gpa = gpa;
+    }
+
+    public double getGpa() {
+        return gpa;
     }
 
     public void setGpa(double gpa) {
@@ -13,7 +17,7 @@ public class GraduateStudent extends Student {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ", GPA: " + gpa;
+    public void printDetails() {
+        System.out.println("Graduate Student: " + getFirstName() + " " + getLastName() + ", Age: " + getStudentAge() + ", Major: " + getMajor() + ", GPA: " + gpa);
     }
 }

@@ -1,13 +1,20 @@
 package Session7.SMS;
 
+import Session7.SMS.GraduateStudent;
+import Session7.SMS.SMS_JSON;
+import Session7.SMS.Student;
+import Session7.SMS.UndergraduateStudent;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentManagement {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         SMS_JSON smsJson = new SMS_JSON();
-        ArrayList<Student> students = new ArrayList<>();
+        List<Student> students = new ArrayList<>();
         smsJson.setStudents(students);
 
         while (true) {
