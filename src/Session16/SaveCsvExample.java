@@ -10,19 +10,19 @@ import java.util.List;
 public class SaveCsvExample {
 
     public static void main(String[] args) {
-//        List<Student> studentList = new ArrayList<>();
-//        studentList.add(new Student(1, "Artem", 43, 2));
-//        studentList.add(new Student(1, "Tim", 43, 2));
-//        studentList.add(new Student(1, "Olga", 43, 2));
-//
-//        saveStudentsToCsv(studentList);
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student(1, "Artem", 43, 2));
+        studentList.add(new Student(1, "Tim", 43, 2));
+        studentList.add(new Student(1, "Olga", 43, 2));
+
+        saveStudentsToCsv(studentList);
         for (Student s : loadStudents()) {
             System.out.println(s);
         }
     }
 
     public static void saveStudentsToCsv (List<Student> students) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("student.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\vital\\FullStackPortnov\\JavaSessions\\Code\\student.csv"))) {
             for (Student s : students) {
                 bw.write(s.toCSV());
                 bw.newLine();
@@ -34,7 +34,7 @@ public class SaveCsvExample {
 
     public static List<Student> loadStudents() {
         List<Student> result = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("student.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\vital\\FullStackPortnov\\JavaSessions\\Code\\student.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 result.add(Student.fromCSV(line));

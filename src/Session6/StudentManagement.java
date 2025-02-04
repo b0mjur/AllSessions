@@ -61,10 +61,12 @@ public class StudentManagement {
                     System.out.println("Enter student age: ");
                     int studentAge = scanner.nextInt();
 
-                    Student student = new Student(studentId, firstName, lastName, studentAge);
+                    Student student = new Student(studentId,
+                                                firstName,
+                                                lastName,
+                                                studentAge);
 
                     students.add(student);
-
                     System.out.println("Information saved successfully");
                     break;
                 case 2:
@@ -74,7 +76,7 @@ public class StudentManagement {
                         System.out.println("Student ID: " + s.studentId);
                         System.out.println("First Name: " + s.firstName);
                         System.out.println("Last Name: " + s.lastName);
-                        System.out.println("Age: " + s.studentAge);
+                        System.out.println("Student's Age: " + s.studentAge);
                         System.out.println("===== End of Student Details =====");
                     }
                     break;
