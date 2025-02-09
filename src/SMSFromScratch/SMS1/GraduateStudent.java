@@ -2,6 +2,7 @@ package SMSFromScratch.SMS1;
 
 public class GraduateStudent extends Student implements Printable {
     private double gpa;
+    private boolean graduated;
 
     public GraduateStudent(String firstName, String lastName, int studentAge, String major, String email, double gpa) {
         super(firstName, lastName, studentAge, major, email);
@@ -14,6 +15,14 @@ public class GraduateStudent extends Student implements Printable {
 
     public void setGpa(double gpa) {
         this.gpa = gpa;
+    }
+
+    public void setGraduated(boolean graduated) {
+        this.graduated = graduated;
+    }
+
+    public boolean isGraduated() {
+        return graduated;
     }
 
     @Override
