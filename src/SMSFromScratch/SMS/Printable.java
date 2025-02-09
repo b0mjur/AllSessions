@@ -1,5 +1,5 @@
 package SMSFromScratch.SMS;
 
 public interface Printable {
-    void printDetails();
+    void print();
 }

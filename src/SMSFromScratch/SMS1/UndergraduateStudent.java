@@ -1,4 +1,4 @@
-package SMSFromScratch.SMS;
+package SMSFromScratch.SMS1;
 
 public class UndergraduateStudent extends Student implements Printable {
     private int undergraduateYear;

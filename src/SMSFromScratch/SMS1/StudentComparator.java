@@ -1,4 +1,4 @@
-package SMSFromScratch.SMS;
+package SMSFromScratch.SMS1;
 
 import java.util.Comparator;
 
