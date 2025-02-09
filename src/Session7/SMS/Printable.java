@@ -1,5 +1,5 @@
-//package Session7.SMS;
-//
-//public interface Printable {
-//    void printDetails();
-//}
+package Session7.SMS;
+
+public interface Printable {
+    void printDetails();
+}
