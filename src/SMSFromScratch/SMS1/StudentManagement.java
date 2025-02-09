@@ -2,6 +2,8 @@ package SMSFromScratch.SMS1;
 
 import com.google.gson.Gson;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +17,6 @@ public class StudentManagement {
         Gson gson = new Gson();
         List<Student> students = new ArrayList<>();
 
-
         while (true) {
             System.out.println("===== Student Menu =====");
             System.out.println("1. Enter student details");
@@ -26,7 +27,8 @@ public class StudentManagement {
             System.out.println("6. Edit student");
             System.out.println("7. Save to JSON");
             System.out.println("8. Load from JSON");
-            System.out.println("9. Exit");
+            System.out.println("9. Export to CSV");
+            System.out.println("10. Exit");
             System.out.println("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -257,12 +259,18 @@ public class StudentManagement {
                     System.out.println("Enter file name to save: ");
                     String fileName = scanner.next();
                     saveToJson(students, gson, fileName);
+                    break;
                 case 8:
                     System.out.println("Enter file name to load: ");
                     String loadFileName = scanner.next();
                     students = loadFromJson(gson, loadFileName);
                     break;
                 case 9:
+                    System.out.println("Enter file name to export: ");
+                    String exportFileName = scanner.next();
+                    exportToCsv(students, exportFileName);
+                    break;
+                case 10:
                     scanner.close();
                     System.exit(0);
                     break;
@@ -296,6 +304,33 @@ public class StudentManagement {
             System.out.println("Information saved successfully " + undergradStudent);
         } else {
             System.out.println("Invalid student type");
+        }
+    }
+
+    public static void exportToCsv(List<Student> students, String fileName) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.append("ID,First Name,Last Name,Age,Major,Email,Graduation Year,GPA\n");
+            for (Student student : students) {
+                writer.append(String.valueOf(student.getStudentId())).append(",");
+                writer.append(student.getFirstName()).append(",");
+                writer.append(student.getLastName()).append(",");
+                writer.append(String.valueOf(student.getStudentAge())).append(",");
+                writer.append(student.getMajor()).append(",");
+                writer.append(student.getEmail()).append(",");
+                if (student instanceof GraduateStudent) {
+                    writer.append("N/A,");
+                    writer.append(String.valueOf(((GraduateStudent) student).getGpa()));
+                } else if (student instanceof UndergraduateStudent) {
+                    writer.append(String.valueOf(((UndergraduateStudent) student).getUndergraduateYear())).append(",");
+                    writer.append("N/A");
+                } else {
+                    writer.append("N/A,N/A");
+                }
+                writer.append("\n");
+            }
+            System.out.println("Students exported to CSV successfully.");
+        } catch (IOException e) {
+            System.out.println("Error writing to CSV file: " + e.getMessage());
         }
     }
 }
