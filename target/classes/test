@@ -1,1 +1,2 @@
-[{"gpa":3.0,"firstName":"sadfa","lastName":"asdfasd","studentAge":21,"major":"Art","email":"asdfasd@gmail.com","studentId":1}]
+ID,First Name,Last Name,Age,Major,Email,Graduation Year,GPA
+1,adfsd,asdfasd,34,Art,dsaf@gmail.com,2026,N/A

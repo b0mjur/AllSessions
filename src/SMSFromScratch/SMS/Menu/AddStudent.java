@@ -24,35 +24,52 @@ public class AddStudent {
         System.out.print("Enter last name: ");
         String lastName = scanner.nextLine();
 
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine();
+        int age;
+        while (true) {
+            System.out.print("Enter age: ");
+            age = scanner.nextInt();
+            scanner.nextLine();
+            try {
+                Student student = new UndergradStudent(0, firstName, lastName, age, Major.ART, "temp@example.com"); // Temporary student to validate age
+                student.setAge(age);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        String email;
+        while (true) {
+            System.out.print("Enter email: ");
+            email = scanner.nextLine();
+            try {
+                Student.validateEmail(email);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         System.out.print("Enter major (ART, ECONOMICS, MATH): ");
         String majorStr = scanner.nextLine();
         Major major = Major.valueOf(majorStr.toUpperCase());
 
-        Student student;
+        Student student = null;
         if (type == 1) {
-            student = new UndergradStudent(studentService.getStudents().size() + 1, firstName, lastName, age, major);
+            student = new UndergradStudent(studentService.getStudents().size() + 1, firstName, lastName, age, major, email);
         } else if (type == 2) {
             System.out.print("Enter GPA: ");
             double gpa = scanner.nextDouble();
             scanner.nextLine();
-            GraduateStudent gradStudent = new GraduateStudent(studentService.getStudents().size() + 1, firstName, lastName, age, major);
-            try {
-                gradStudent.setGPA(gpa);
-            } catch (IllegalGpaException e) {
-                System.out.println("Invalid GPA: " + e.getMessage());
-                return;
-            }
+            GraduateStudent gradStudent = new GraduateStudent(studentService.getStudents().size() + 1, firstName, lastName, age, major, email);
+            gradStudent.setGPA(gpa);
             student = gradStudent;
-        } else {
-            System.out.println("Invalid student type.");
-            return;
         }
 
-        studentService.addStudent(student);
-        System.out.println("Student added successfully.");
+        if (student != null) {
+            studentService.addStudent(student);
+            System.out.println("Student added successfully.");
+        } else {
+            System.out.println("Invalid student type.");
+        }
     }
 }

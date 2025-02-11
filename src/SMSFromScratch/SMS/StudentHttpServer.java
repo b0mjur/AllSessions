@@ -12,7 +12,7 @@ import java.net.InetSocketAddress;
 import java.util.List;
 
 public class StudentHttpServer {
-    private static final int PORT = 8081;
+    private static final int PORT = 8086;
     private StudentService studentService;
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -129,7 +129,7 @@ public class StudentHttpServer {
             int age = jsonNode.get("age").asInt();
             Major major = Major.valueOf(jsonNode.get("major").asText());
 
-            Student student = new UndergradStudent(id, firstName, lastName, age, major);
+            Student student = new UndergradStudent(id, firstName, lastName, age, major, null);
             studentService.addStudent(student);
             studentService.saveStudents();
             return objectMapper.writeValueAsString(student);
@@ -239,7 +239,8 @@ public class StudentHttpServer {
                     student.getFirstName(),
                     student.getLastName(),
                     student.getAge(),
-                    student.getMajor()
+                    student.getMajor(),
+                    student.getEmail()
             );
 
             // Set GPA

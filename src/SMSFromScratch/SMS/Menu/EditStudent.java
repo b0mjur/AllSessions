@@ -57,19 +57,6 @@ public class EditStudent {
             studentToEdit.setMajor(major);
         }
 
-        if (studentToEdit instanceof GraduateStudent) {
-            System.out.print("Enter new GPA (leave blank to keep current): ");
-            String gpaStr = scanner.nextLine();
-            if (!gpaStr.isEmpty()) {
-                double gpa = Double.parseDouble(gpaStr);
-                try {
-                    ((GraduateStudent) studentToEdit).setGPA(gpa);
-                } catch (IllegalGpaException e) {
-                    System.out.println("Invalid GPA: " + e.getMessage());
-                }
-            }
-        }
-
         System.out.println("Student details updated successfully.");
     }
 }
